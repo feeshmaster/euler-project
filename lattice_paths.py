@@ -1,7 +1,7 @@
 gridsz = 20
 
 def progress(x, y):
-    i = 0;
+    i = 0
     if i % 100 == 0:
         print(i)
     if y < gridsz:

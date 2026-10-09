@@ -3,7 +3,7 @@ import math
 def get_primes(l):
     s = [True] * (l+1)
     s[0] = s[1] = False
-    for i in range(2, int(math.sqrt(l)+1))
+    for i in range(2, int(math.sqrt(l)+1)):
         if s[i]:
             for j in range(i*i, l+1, i):
                 s[j] = False

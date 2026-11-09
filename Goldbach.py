@@ -1,55 +1,29 @@
 import math
-def gp(l):
+
+def get_primes(l):
     s = [True] * (l+1)
     s[0] = s[1] = False
     for i in range(2, int(math.sqrt(l))+1):
         if s[i]:
             for j in range(i*i, l+1, i):
                 s[j] = False
-    return [x for x in range(2, l+1) if s[x]]
-primes = gp(1000000)
-def is_composite(n):
-    if n <= 1:
-        return False
-    if n <= 3:
-        return False
-    
-    if n%2 == 0 or n%3 == 0:
-        return True
-    i = 5
-    while i*i <= n:
-        if n%i == 0 or n%(i+2) == 0:
-            return True
-        i += 6
-    return False
+                
+    return [x for x in range(l+1) if s[x]]
 
-for i in range(4, 100000):
-    found = False
-    if i%2 == 0 or not is_composite(i):
-        continue
-    for p in primes:
-        if i <= p:
-            break
-        for j in range(1, p):
-            if p + 2*(j**2) == i:
-                found = True
-    if not found:
-        print(i)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+def solve():
+    ceiling = 10000
+    primes = get_primes(ceiling)
+    found = [False] * (ceiling+1)
+    found[0] = found[1] = True
+    for prime in primes:
+        found[prime] = True
+        for i in range(1, int(math.sqrt(ceiling-prime)/2)+1):
+            n = prime + 2*(i**2)
+            if n < ceiling:
+                found[n] = True
+
+    for n, works in enumerate(found):
+        if not works and n % 2 == 1:
+            return n
+            
+print(solve())
